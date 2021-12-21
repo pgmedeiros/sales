@@ -1,6 +1,7 @@
 package com.sales.api.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,7 +12,7 @@ public class Sales {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private double value;
-    private Calendar date;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "vendedor_id")
@@ -33,11 +34,11 @@ public class Sales {
         this.value = value;
     }
 
-    public Calendar getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

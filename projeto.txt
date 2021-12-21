@@ -1,0 +1,4 @@
+A SER FEITO
+CONTROLLERS DO SALESPERSON E SALES
+SERVICES DE AMBOS PARA CRUD
+FEIT0 - requisição por parÂmetros de data, feito.
