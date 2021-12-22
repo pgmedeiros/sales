@@ -23,14 +23,24 @@ public class SalesPersonControllerIntegrationTest {
     @InjectMocks
     private DateDTO finalDateDTO;
     @InjectMocks
+    private DateDTO notExistinginitialDateDTO;
+    @InjectMocks
+    private DateDTO notExistingfinalDateDTO;
+    @InjectMocks
     private ArrayList<DateDTO> listDateDTO = new ArrayList<>();
+    @InjectMocks
+    private ArrayList<DateDTO> notExistinglistDateDTO = new ArrayList<>();
     private int listOfResult;
     @BeforeEach
     public void setup(){
         initialDateDTO.setDate("2001-01-11");
         finalDateDTO.setDate("2001-01-20");
+        notExistinginitialDateDTO.setDate("2010-01-01");
+        notExistingfinalDateDTO.setDate("2010-01-10");
         listDateDTO.add(initialDateDTO);
         listDateDTO.add(finalDateDTO);
+        notExistinglistDateDTO.add(notExistinginitialDateDTO);
+        notExistinglistDateDTO.add(notExistingfinalDateDTO);
         listOfResult = 10;
     }
 
@@ -38,6 +48,12 @@ public class SalesPersonControllerIntegrationTest {
     public void findByRangeOfDateShouldReturnListOfSales(){
         List<Sales> sales = salesPersonController.findByRangeOfDate(listDateDTO);
         Assertions.assertEquals(10, sales.size());
+    }
+
+    @Test
+    public void findByRangeOfDateShouldReturnListOfSalesWhenNotExistingDatesAreProvided(){
+        List<Sales> sales = salesPersonController.findByRangeOfDate(notExistinglistDateDTO);
+        Assertions.assertEquals(0, sales.size());
     }
 
 

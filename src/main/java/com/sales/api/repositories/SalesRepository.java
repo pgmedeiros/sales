@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface SalesRepository extends JpaRepository<Sales, Long> {
 
-    @Query("SELECT s FROM Sales s WHERE s.date BETWEEN TO_DATE(?1, 'yyyy-MM-dd') AND TO_DATE(?2, 'yyyy-MM-dd')")
+    @Query("SELECT s FROM Sales s WHERE (s.date BETWEEN TO_DATE(?1, 'yyyy-MM-dd') AND TO_DATE(?2, 'yyyy-MM-dd'))")
     Optional<List<Sales>> findByDateRange(String initialDate, String finalDate);
 
 

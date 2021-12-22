@@ -16,10 +16,7 @@ public class SalesService {
 
     public List<Sales> findByDateRange(String initialDate, String finalDate){
         Optional<List<Sales>> sales = salesRepository.findByDateRange(initialDate, finalDate);
-        if(sales.get().size() != 0){
             return sales.get();
-        }
-        return null;
     }
 
 }
