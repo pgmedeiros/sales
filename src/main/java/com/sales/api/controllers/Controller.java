@@ -24,13 +24,6 @@ public class Controller {
     @Autowired
     SalesPersonService salesPersonService;
 
-
-    @PostMapping("/data")
-    public List<Sales> findByRangeOfDate(@RequestBody List<DateDTO> date){
-        List<Sales> sales = salesService.findByDateRange(date.get(0).getDate(), date.get(1).getDate());
-        return sales;
-    }
-
     @PostMapping("/newsale")
     public ResponseEntity newSale(@RequestBody Sales sale){
         salesService.save(sale);
