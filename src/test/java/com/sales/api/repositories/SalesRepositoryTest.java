@@ -37,6 +37,13 @@ public class SalesRepositoryTest {
         Optional<List<Sales>> sales = salesRepository.findByDateRange(initialDate, finalDate);
         Assertions.assertEquals(numberOfRegistersToBeFound, sales.get().size());
     }
+
+    @Test
+    public void findByDateRangeShouldReturnNameVendedor01WhenGetZero(){
+        Optional<List<Sales>> sales = salesRepository.findByDateRange(initialDate, finalDate);
+        Assertions.assertEquals("vendedor01", sales.get().get(0).getSalesPerson().getName());
+    }
+
     @Test
     public void findByDateRangeShouldReturnNotEqualsWhenNumberOfRegistersToBeNotFoundIsUsed(){
         Optional<List<Sales>> sales = salesRepository.findByDateRange(initialDate, finalDate);

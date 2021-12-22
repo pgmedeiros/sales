@@ -16,7 +16,7 @@ import java.util.List;
 public class SalesPersonControllerIntegrationTest {
 
     @Autowired
-    SalesPersonController salesPersonController;
+    Controller salesPersonController;
 
     @InjectMocks
     private DateDTO initialDateDTO;

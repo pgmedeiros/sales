@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.EmptyResultDataAccessException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,15 +97,21 @@ public class SalesPersonRepositoryTest {
     }
 
     @Test
-    public void findSalesByRangeOfDateShouldReturnAverageValueOfSales(){
+    public void findSalesByRangeOfDateAndSalesPersonIdShouldReturnEqualsWhenNumberOfSalesIsOkRight(){
         Optional<List<Sales>> sales = salesPersonRepository.getSalesByRangeOfDateAndSalesPersonId(initialDate, finalDate, 2L);
         Assertions.assertEquals(numberOfSales ,sales.get().size());
     }
 
     @Test
-    public void findSalesByRangeOfDateShouldReturnFailAverageValueOfSales(){
+    public void findSalesByRangeOfDateAndSalesPersonIdShouldReturnEqualsWhenNumberOfSalesIsNotNumberOfSales(){
         Optional<List<Sales>> sales = salesPersonRepository.getSalesByRangeOfDateAndSalesPersonId(initialDate, finalDate, 2L);
         Assertions.assertNotEquals(notNumberOfSales ,sales.get().size());
+    }
+
+    @Test
+    public void findSalesByRangeOfDateAndSalesPersonIdShouldReturnEqualsWhenValueIs65(){
+        Optional<List<Sales>> sales = salesPersonRepository.getSalesByRangeOfDateAndSalesPersonId(initialDate, finalDate, 2L);
+        Assertions.assertNotEquals("<300.0>" ,sales.get().get(0).getValue());
     }
 
 
