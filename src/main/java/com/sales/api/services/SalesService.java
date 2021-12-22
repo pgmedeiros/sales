@@ -19,4 +19,8 @@ public class SalesService {
             return sales.get();
     }
 
+    public void save(Sales sale){
+        salesRepository.save(sale);
+    }
+
 }

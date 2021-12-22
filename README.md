@@ -1,58 +1,24 @@
 ### sales - explicação do projeto
 
-Para acessar vendas de determinado período, faça:
+##### Para fazer uma nova venda, faça:
 
-**POST** localhost:8080/sales
+**POST** localhost:8080/newsale
 
 ```
-[
-    {
-        "date" : "2001-01-01"
-    },
-    {
-        "date" : "2001-01-20"
+{
+    "value" : 210.00,
+    "date" : "2001-01-01",
+    "salesPerson" : {
+        "id" : 1
     }
-]
-
-[
-    {
-        dataInicial
-    },
-    {
-        dataFinal
-    }
-]
-
-
-```
-
-[](
-
-Para acessar a média de vendas por vendedor, faça: 
-
-**POST** localhost:8080/average 
-
-```
-[{
-    "date" : "2001-01-01"
-},
-{
-    "date" : "2001-01-20"
-},
-{
-    "id": 1
-}]
-
-[
-{
-	datainicial
-}, 
-{
-	datafinal
-}, 
-{
-	idDoVendedor
 }
-]
+
+{
+    valor,
+    data,
+    vendedor : {
+        id
+    }
+}
 ```
 

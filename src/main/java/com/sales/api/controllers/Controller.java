@@ -8,6 +8,8 @@ import com.sales.api.repositories.SalesPersonRepository;
 import com.sales.api.services.SalesPersonService;
 import com.sales.api.services.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +42,12 @@ public class Controller {
     public double findByRangeOfPersonId(@RequestBody List<IdDTO> idDTO){
         double sales = salesPersonService.findAverageValueOfSalesShouldReturnAveragePrice(idDTO);
         return sales;
+    }
+
+    @PostMapping("/newsale")
+    public ResponseEntity newSale(@RequestBody Sales sale){
+        salesService.save(sale);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 
