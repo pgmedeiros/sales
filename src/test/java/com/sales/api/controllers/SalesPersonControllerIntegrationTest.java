@@ -44,17 +44,6 @@ public class SalesPersonControllerIntegrationTest {
         listOfResult = 10;
     }
 
-    @Test
-    public void findByRangeOfDateShouldReturnListOfSales(){
-        List<Sales> sales = salesPersonController.findByRangeOfDate(listDateDTO);
-        Assertions.assertEquals(10, sales.size());
-    }
-
-    @Test
-    public void findByRangeOfDateShouldReturnListOfSalesWhenNotExistingDatesAreProvided(){
-        List<Sales> sales = salesPersonController.findByRangeOfDate(notExistinglistDateDTO);
-        Assertions.assertEquals(0, sales.size());
-    }
 
 
 }

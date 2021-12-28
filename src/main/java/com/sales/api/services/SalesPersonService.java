@@ -2,11 +2,13 @@ package com.sales.api.services;
 
 import com.sales.api.dto.DataDTO;
 import com.sales.api.dto.IdDTO;
+import com.sales.api.dto.RangeOfDatesDTO;
 import com.sales.api.entities.Sales;
 import com.sales.api.entities.SalesPerson;
 import com.sales.api.repositories.SalesPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.ranges.Range;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -31,32 +33,32 @@ public class SalesPersonService {
         return salesPersonOptional;
     }
 
-    public int findNumberOfSalesById(List<IdDTO> idDTO, Long id){
+    public int findNumberOfSalesById(RangeOfDatesDTO rangeOfDatesDTO, Long id){
         ArrayList<Sales> arrayList = new ArrayList<>();
-        localDateOne = idDTO.get(0).getDate();
-        localDateTwo = idDTO.get(1).getDate();
+        localDateOne = rangeOfDatesDTO.getInitial_date();
+        localDateTwo = rangeOfDatesDTO.getFinal_date();
         Optional<List<Sales>> listOfOptionalSales = salesPersonRepository
-                .getSalesByRangeOfDateAndSalesPersonId(idDTO.get(0).getDate(), idDTO.get(1).getDate(), id);
+                .getSalesByRangeOfDateAndSalesPersonId(rangeOfDatesDTO.getInitial_date(), rangeOfDatesDTO.getFinal_date(), id);
         ArrayList<Sales> listOfSales = (ArrayList<Sales>) listOfOptionalSales.get();
 
         return listOfSales.size();
     }
 
-    public int daysBetweenTwoDates(List<IdDTO> idDTO){
-        localDateOne = idDTO.get(0).getDate();
-        localDateTwo = idDTO.get(1).getDate();
+    public int daysBetweenTwoDates(RangeOfDatesDTO rangeOfDatesDTO){
+        localDateOne = rangeOfDatesDTO.getInitial_date();
+        localDateTwo = rangeOfDatesDTO.getFinal_date();
         int diff;
         Period period = Period.between(LocalDate.parse(localDateTwo), LocalDate.parse(localDateOne));
         return diff = Math.abs(period.getDays());
     }
 
-    public double averageSalesPerDay(List<IdDTO> idDTO, Long id){
-        int numberOfSales = findNumberOfSalesById(idDTO, id);
-        int days = daysBetweenTwoDates(idDTO);
+    public double averageSalesPerDay(RangeOfDatesDTO rangeOfDatesDTO, Long id){
+        int numberOfSales = findNumberOfSalesById(rangeOfDatesDTO, id);
+        int days = daysBetweenTwoDates(rangeOfDatesDTO);
         return numberOfSales / days;
     }
 
-    public ArrayList<DataDTO> getData(List<IdDTO> idDTOS){
+    public ArrayList<DataDTO> getData(RangeOfDatesDTO rangeOfDatesDTO){
         List<SalesPerson> salesPerson = salesPersonRepository.findAll();
         ArrayList<DataDTO> dataDTOS = new ArrayList<>();
         int size = salesPerson.size();
@@ -64,8 +66,8 @@ public class SalesPersonService {
         for(int count = 1; count <= size; count++){
             DataDTO data = new DataDTO();
             data.setName(getSalesPerson(id).get().getName());
-            data.setTotalOfSales(findNumberOfSalesById(idDTOS, id));
-            data.setAverageSalesPerDay(averageSalesPerDay(idDTOS, id));
+            data.setTotalOfSales(findNumberOfSalesById(rangeOfDatesDTO, id));
+            data.setAverageSalesPerDay(averageSalesPerDay(rangeOfDatesDTO, id));
             dataDTOS.add(data);
             id++;
         }

@@ -1,0 +1,13 @@
+erro - receber array de datas e não um obejeto. usuario malicioso pode simplesmente não enviar uma data.
+erro - usar dto compartilhado, melhor isolar o codigo
+erro - repetir consulta ao banco, ocupando duas vezes memoria com mesmo dados
+erro - testes não foram realizados completamente. testar dados retornados.
+erro - não utilizar streams
+dica - fazer grou by and sum no db e não esperar chegar no codigo
+
+erro - package private - não soueb explicar
+ArrayList como interface de acesso
+Get Optional sem verificar se tem algo dentro
+
+
+1 - Corrigir dados recebidos pelo controller. Validar objeto.

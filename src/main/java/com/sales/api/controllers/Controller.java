@@ -2,10 +2,8 @@ package com.sales.api.controllers;
 
 import com.sales.api.dto.DataDTO;
 import com.sales.api.dto.IdDTO;
-import com.sales.api.dto.DateDTO;
+import com.sales.api.dto.RangeOfDatesDTO;
 import com.sales.api.entities.Sales;
-import com.sales.api.entities.SalesPerson;
-import com.sales.api.repositories.SalesPersonRepository;
 import com.sales.api.services.SalesPersonService;
 import com.sales.api.services.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +29,9 @@ public class Controller {
     }
 
     @PostMapping("/data")
-    public ArrayList<DataDTO> find(@RequestBody List<IdDTO> date){
+    public ArrayList<DataDTO> find(@RequestBody RangeOfDatesDTO rangeOfDatesDTO){
         ArrayList<DataDTO> data = new ArrayList<>();
-        data = salesPersonService.getData(date);
+        data = salesPersonService.getData(rangeOfDatesDTO);
         return data;
     }
 
