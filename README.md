@@ -21,14 +21,12 @@
 **POST** localhost:8080/data
 
 ```
-[
+
     {
-        "date" : "2001-01-01", 
-    }, 
-    {
-    	"date" : "2001-01-20"
+        "initial_date" : "2001-01-01", 
+    	"final_date" : "2001-01-20"
     }
-]
+
 
 Apenas as datas são informadas.
 ```
